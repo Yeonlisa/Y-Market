@@ -14,7 +14,7 @@ function FileUpload(props) {
         }
         formData.append("file", files[0])
         //save the Image we chose inside the Node Server 
-        Axios.post('/api/product/uploadImage', formData, config)
+        Axios.post('/api/product/image', formData, config)
             .then(response => {
                 if (response.data.success) {
 
@@ -22,7 +22,7 @@ function FileUpload(props) {
                     props.refreshFunction([...Images, response.data.image])
 
                 } else {
-                    alert('Failed to save the Image in Server')
+                    alert('파일을 저장하는데 실패했습니다.')
                 }
             })
     }
