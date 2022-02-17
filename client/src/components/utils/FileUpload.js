@@ -27,6 +27,17 @@ function FileUpload(props) {
             })
     }
 
+
+    const onDelete = (image) => {
+        const currentIndex = Images.indexOf(image);
+
+        let newImages = [...Images]
+        newImages.splice(currentIndex, 1)
+
+        setImages(newImages)
+        props.refreshFunction(newImages)
+    }
+
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Dropzone
