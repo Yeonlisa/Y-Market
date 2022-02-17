@@ -135,7 +135,6 @@ function LandingPage() {
 
         setSkip(0)
         setSearchTerms(newSearchTerm)
-
         getProducts(variables)
     }
 
