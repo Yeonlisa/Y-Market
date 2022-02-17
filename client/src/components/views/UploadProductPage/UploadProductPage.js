@@ -45,6 +45,36 @@ function UploadProductPage() {
         setImages(newImages)
     }
 
+    const onSubmit = (event) => {
+        event.preventDefault();
+
+
+        if (!TitleValue || !DescriptionValue || !PriceValue ||
+            !ContinentValue || !Images) {
+            return alert('모든 값을 넣어주셔야 합니다.')
+        }
+
+        const variables = {
+            writer: props.user.userData._id,
+            title: TitleValue,
+            description: DescriptionValue,
+            price: PriceValue,
+            images: Images,
+            continents: ContinentValue,
+        }
+
+        Axios.post('/api/product', variables)
+            .then(response => {
+                if (response.data.success) {
+                    alert('상품 업로드에 성공 했습니다.')
+                    props.history.push('/')
+                } else {
+                    alert('상품 업로드에 실패 했습니다.')
+                }
+            })
+
+    }
+
 
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
