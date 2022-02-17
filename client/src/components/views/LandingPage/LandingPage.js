@@ -1,7 +1,9 @@
+/*eslint-disable*/
 import React, { useEffect, useState } from 'react'
 import { FaCode } from "react-icons/fa";
 import Axios from 'axios';
 import { Icon, Col, Card, Row } from 'antd';
+import ImageSlider from '../../utils/ImageSlider';
 
 const { Meta } = Card;
 
@@ -80,6 +82,7 @@ function LandingPage() {
                     <RadioBox
                         list={price}
                         handleFilters={filters => handleFilters(filters, "price")}
+
                     />
                 </Col>
             </Row>
