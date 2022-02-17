@@ -77,6 +77,37 @@ function LandingPage() {
         </Col>
     })
 
+    const showFilteredResults = (filters) => {
+
+        const variables = {
+            skip: 0,
+            limit: Limit,
+            filters: filters
+
+        }
+        getProducts(variables)
+        setSkip(0)
+
+    }
+
+    const handleFilters = (filters, category) => {
+
+        const newFilters = { ...Filters }
+
+        newFilters[category] = filters
+
+        if (category === "price") {
+            let priceValues = handlePrice(filters)
+            newFilters[category] = priceValues
+
+        }
+
+        console.log(newFilters)
+
+        showFilteredResults(newFilters)
+        setFilters(newFilters)
+    }
+
     return (
         <div style={{ width: '75%', margin: '3rem auto' }}>
             <div style={{ textAlign: 'center' }}>
