@@ -5,6 +5,16 @@ import { Typography, Button, Form, message, Input, Icon } from 'antd';
 const { Title } = Typography;
 const { TextArea } = Input;
 
+const Continents = [
+    { key: 1, value: "Africa" },
+    { key: 2, value: "Europe" },
+    { key: 3, value: "Asia" },
+    { key: 4, value: "North America" },
+    { key: 5, value: "South America" },
+    { key: 6, value: "Australia" },
+    { key: 7, value: "Antarctica" }
+]
+
 
 function UploadProductPage() {
     const [TitleValue, setTitleValue] = useState("")
@@ -24,6 +34,10 @@ function UploadProductPage() {
 
     const onPriceChange = (event) => {
         setPriceValue(event.currentTarget.value)
+    }
+
+    const onContinentsSelectChange = (event) => {
+        setContinentValue(event.currentTarget.value)
     }
 
 
@@ -62,8 +76,10 @@ function UploadProductPage() {
                     type="number"
                 />
                 <br /><br />
-                <select>
-                    <option></option>
+                <select onChange={onContinentsSelectChange} value={ContinentValue}>
+                    {Continents.map(item => (
+                        <option key={item.key} value={item.key}>{item.value} </option>
+                    ))}
                 </select>
                 <br />
                 <br />
