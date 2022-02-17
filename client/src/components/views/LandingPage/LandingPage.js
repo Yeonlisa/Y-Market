@@ -1,6 +1,5 @@
 /*eslint-disable*/
 import React, { useEffect, useState } from 'react'
-import { FaCode } from "react-icons/fa";
 import Axios from 'axios';
 import { Icon, Col, Card, Row } from 'antd';
 import ImageSlider from '../../utils/ImageSlider';
@@ -45,6 +44,20 @@ function LandingPage() {
                     alert('상품들을 가져오는데 실패 했습니다.')
                 }
             })
+    }
+
+    const onLoadMore = () => {
+        let skip = Skip + Limit;
+
+        const variables = {
+            skip: skip,
+            limit: Limit,
+            loadMore: true,
+            filters: Filters,
+            searchTerm: SearchTerms
+        }
+        getProducts(variables)
+        setSkip(skip)
     }
 
     const renderCards = Products.map((product, index) => {
