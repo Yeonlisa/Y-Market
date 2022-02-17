@@ -6,6 +6,7 @@ import ImageSlider from '../../utils/ImageSlider';
 import CheckBox from './Sections/CheckBox';
 import RadioBox from './Sections/RadioBox';
 import { continents, price } from './Sections/Datas';
+import SearchFeature from './Sections/SearchFeature';
 
 const { Meta } = Card;
 
@@ -121,6 +122,21 @@ function LandingPage() {
         }
         console.log('array', array)
         return array
+    }
+
+    const updateSearchTerms = (newSearchTerm) => {
+
+        const variables = {
+            skip: 0,
+            limit: Limit,
+            filters: Filters,
+            searchTerm: newSearchTerm
+        }
+
+        setSkip(0)
+        setSearchTerms(newSearchTerm)
+
+        getProducts(variables)
     }
 
     return (
