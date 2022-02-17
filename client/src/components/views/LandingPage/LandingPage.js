@@ -1,14 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaCode } from "react-icons/fa";
+import Axios from 'axios';
 
 function LandingPage() {
+
+    useEffect(() => {
+
+        const variables = {
+            skip: Skip,
+            limit: Limit,
+        }
+
+        getProducts(variables)
+
+    }, [])
+
+    const getProducts = (variables) => {
+        Axios.post('/api/product/products', variables)
+            .then(response => {
+                if (response.data.success) {
+                    if (variables.loadMore) {
+                        setProducts([...Products, ...response.data.products])
+                    } else {
+                        setProducts(response.data.products)
+                    }
+                    setPostSize(response.data.postSize)
+                } else {
+                    alert('Failed to fectch product datas')
+                }
+            })
+    }
     return (
         <>
-            <div className="app">
-                <FaCode style={{ fontSize: '4rem' }} /><br />
-                <span style={{ fontSize: '2rem' }}>Let's Start Coding!</span>
-            </div>
-            <div style={{ float: 'right' }}>Thanks For Using This Boiler Plate by John Ahn</div>
+            Landing Page
         </>
     )
 }

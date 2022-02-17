@@ -47,6 +47,17 @@ router.post("/", (req, res) => {
     })
 });
 
+router.post("/products", (req, res) => {
+    // product collection에 들어있는 모든 상품 정보를 가져오기
+
+    Product.find({ '_id': { $in: productIds } })
+        .populate('writer')
+        .exec((err, product) => {
+            if (err) return res.status(400).send(err)
+            return res.status(200).send(product)
+        })
+});
+
 
 
 module.exports = router;
