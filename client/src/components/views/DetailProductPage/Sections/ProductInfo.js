@@ -12,6 +12,7 @@ function ProductInfo(props) {
     }, [props.detail])
 
     const addToCarthandler = () => {
+        // 필요한 정보를 Cart 필드에다가 넣어 준다.
         props.addToCart(props.detail._id)
     }
 
