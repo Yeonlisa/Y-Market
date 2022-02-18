@@ -72,17 +72,18 @@ router.get('/addToCart', auth, (req, res) => {
 
     //먼저 User Collection에 해당 유저의 정보를 가져오기
     User.findOne({ _id: req.user._id }, (err, userInfo) => {
-        let duplicate = false;
-
+        
         console.log(userInfo)
-
+        
+        //가져온 정보에서 카트에다 넣으려 하는 상품이 이미 들어 있는지 확인
+        let duplicate = false;
         userInfo.cart.forEach((item) => {
             if (item.id == req.query.productId) {
                 duplicate = true;
             }
         })
 
-
+        //상품이 이미 있을때
         if (duplicate) {
             User.findOneAndUpdate(
                 { _id: req.user._id, "cart.id": req.query.productId },
@@ -93,6 +94,7 @@ router.get('/addToCart', auth, (req, res) => {
                     res.status(200).json(userInfo.cart)
                 }
             )
+        //상품이 이미 있지 않을때
         } else {
             User.findOneAndUpdate(
                 { _id: req.user._id },
