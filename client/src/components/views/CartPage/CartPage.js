@@ -42,7 +42,6 @@ function CartPage(props) {
         cartDetail.map(item => {
             total += parseInt(item.price, 10) * item.quantity
         });
-
         setTotal(total)
         setShowTotal(true)
     }
