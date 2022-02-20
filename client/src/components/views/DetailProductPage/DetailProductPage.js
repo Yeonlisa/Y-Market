@@ -15,13 +15,9 @@ function DetailProductPage(props) {
     useEffect(() => {
         Axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
             .then(response => {
-                if(response.data.success) {
-                    setProduct(response.data[0])
-                } else {
-                    alert("상세 정보 가져오기를 실패했습니다.")
-                }
+                setProduct(response.data[0])
             })
-
+            .catch(err => alert(err))
     }, [])
 
     const addToCartHandler = (productId) => {
