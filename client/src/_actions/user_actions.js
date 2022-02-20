@@ -92,7 +92,7 @@ export function getCartItems(cartItems, userCart) {
 export function removeCartItem(id) {
     const request = axios.get(`/api/users/removeFromCart?_id=${id}`)
         .then(response => {
-
+            //productInfo, cart 정보를 조합해서 CartDetail을 만든다.
             response.data.cart.forEach(item => {
                 response.data.cartDetail.forEach((k, i) => {
                     if (item.id === k._id) {
