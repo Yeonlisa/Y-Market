@@ -178,7 +178,7 @@ router.post('/successBuy', auth, (req, res) => {
     let history = [];
     let transactionData = {};
 
-    //1.Put brief Payment Information inside User Collection 
+    //1. User Collection 안에 History 필드 안에 간단한 결제 정보 넣어주기
     req.body.cartDetail.forEach((item) => {
         history.push({
             dateOfPurchase: Date.now(),
@@ -190,7 +190,7 @@ router.post('/successBuy', auth, (req, res) => {
         })
     })
 
-    //2.Put Payment Information that come from Paypal into Payment Collection 
+    //2. Payment Collection 안에 자세한 결제 정보들 넣어주기
     transactionData.user = {
         id: req.user._id,
         name: req.user.name,
@@ -201,7 +201,7 @@ router.post('/successBuy', auth, (req, res) => {
     transactionData.data = req.body.paymentData;
     transactionData.product = history
 
-
+    //3. Product Collection 안에 있는 sold 필드 정보 업데이트 시켜주기
     User.findOneAndUpdate(
         { _id: req.user._id },
         { $push: { history: history }, $set: { cart: [] } },
