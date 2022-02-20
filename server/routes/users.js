@@ -5,6 +5,8 @@ const { Product } = require('../models/Product');
 const { auth } = require("../middleware/auth");
 const { Payment } = require('../models/Payment');
 
+const async = require('async');
+
 //=================================
 //             User
 //=================================
@@ -216,16 +218,11 @@ router.post('/successBuy', auth, (req, res) => {
 
                 //3. Product Collection 안에 있는 sold 필드 정보 업데이트 시켜주기 
 
-                //first We need to know how many product were sold in this transaction for 
-                // each of products
-
+                //상품 당 몇개의 quantity를 샀는지
                 let products = [];
                 doc.product.forEach(item => {
                     products.push({ id: item.id, quantity: item.quantity })
                 })
-
-                // first Item    quantity 2
-                // second Item  quantity 3
 
                 async.eachSeries(products, (item, callback) => {
                     Product.update(
