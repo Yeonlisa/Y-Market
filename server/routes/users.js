@@ -3,6 +3,7 @@ const router = express.Router();
 const { User } = require("../models/User");
 const { Product } = require('../models/Product');
 const { auth } = require("../middleware/auth");
+const { Payment } = require('../models/Payment');
 
 //=================================
 //             User

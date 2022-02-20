@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import { Row, Col } from 'antd';
